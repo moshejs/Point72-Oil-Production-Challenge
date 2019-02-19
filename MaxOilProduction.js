@@ -18,7 +18,6 @@ const isNegativeOrNaN = require('./isNegativeOrNaN');
             throw new Error(`Values must be postive numbers`);
         }
 
-
         this.decline = decline;
         this.period = period;
         this.drills = drills;

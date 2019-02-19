@@ -1,6 +1,6 @@
 # Motivation
 
-At first, one might try a naive (or brute force) solution to solve this problem. While it does get the task completed, it does not show a fair understanding of the problem, and can prevent one from discovering a cyclical pattern of oil production given the constrants [p,r,d, out0]. While my solution is algorithmic, I discuss the method of brute force in detail.
+At first, one might try a naive (or brute force) solution to solve this problem. While it does get the task completed, it does not show a fair understanding of the problem, and can prevent one from discovering a cyclical pattern of oil production given the constrants [p,r,d, out0]. While my solution is algorithmic, I discuss the method of brute force in detail at the end.
 
     constructor(decline, period, drills, initialOutput) {
         if(decline <= 0 || period <= 0 || drills <= 0  || initialOutput <= 0) 

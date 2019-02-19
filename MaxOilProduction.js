@@ -13,7 +13,7 @@
      * @param {number} initialOutput - The initial output of a well in barrels of oil.
      */
     constructor(decline, period, drills, initialOutput) {
-        if(decline <=0 || period <=0 || drills <=0  || initialOutput <= 0) {
+        if(decline <= 0 || period <= 0 || drills <= 0  || initialOutput <= 0) {
             throw new Error(`Values must be >= 0`);
         }
 

@@ -18,14 +18,14 @@ git clone https://github.com/moshejs/Point72-Oil-Production-Challenge.git
 
 ## Run CLI calculator
 #### This will allow you to use your own inputs.
-``` bash
+```
 cd Point72-Oil-Production-Challenge
 npm install
 npm start
 ```
 
 Your output should look like this...
-``` bash
+```
 $ npm start
 
 > max-oil-production@0.0.0 start /Point72-Oil-Production-Challenge
@@ -47,7 +47,7 @@ npm install
 npm test
 ```
 Your results should look like this...
-``` bash
+```
 $ npm test
 
 > max-oil-production@0.0.0 test /Point72-Oil-Production-Challenge

@@ -35,7 +35,7 @@ How many mining drills does the company own (d)? 1
 What is the period of days each drill finishes an oil well (p)? 7
 What is the initial output of a well per day in barrels of oil (out0)? 300
 What is the daily rate of decline of oil output in barrels of oil per day (r)? 11
-It will take 28 day(s) untill max production levels are reached, and will yield 738 barrel(s) of oil!
+It will take 28 day(s) until max production levels are reached, and will yield 738 barrel(s) of oil!
 Would you like to run this again? (1 = Yes, any key to quit) 
 ```
 

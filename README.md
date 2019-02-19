@@ -13,15 +13,15 @@ Given the inputs `[d, p, out(0), r]` your task is to predict two outputs:
 ## Clone Repo 
 #### Follow these steps to clone the repository
 ``` bash
-    git clone https://github.com/moshejs/Point72-Oil-Production-Challenge.git
+git clone https://github.com/moshejs/Point72-Oil-Production-Challenge.git
 ```
 
 ## Run CLI calculator
 #### This will allow you to use your own inputs.
 ``` bash
-  cd Point72/
-  npm install
-  npm start
+cd Point72/
+npm install
+npm start
 ```
 
 Your output should look like this...
@@ -42,9 +42,9 @@ Would you like to run this again? (1 = Yes, any key to quit)
 ## Run Tests
 #### This will run all unit tests for the exercise
 ``` bash
-  cd Point72/
-  npm install
-  npm test
+cd Point72/
+npm install
+npm test
 ```
 Your results should look like this...
 ``` bash

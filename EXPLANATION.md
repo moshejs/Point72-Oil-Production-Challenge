@@ -15,7 +15,7 @@ At first, one might try a naive (or brute force) solution to solve this problem.
 # Algorithmic approach
 
 ## TL;DR
-### We reach max production at the period after the first well has been depleted.
+### We reach max production at the period after the first well has been depleted, except when first well depletes before a second well is fully drilled.
 
 ## `t(max)`
 
@@ -55,7 +55,6 @@ To calculate the supply of an individual well, we subtract the product of the ra
         }
         return total * this.drills;
     }
-
 
 # Brute Force
 

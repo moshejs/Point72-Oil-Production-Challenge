@@ -21,7 +21,7 @@ const Ask = function(questions) {
         });
 
         let results = [];
-        for(let i=0;i < questions.length;i++) {
+        for(let i = 0; i < questions.length; i++) {
             const result = await AskQuestion(rl, questions[i]);
             results.push(Number(result));
         }

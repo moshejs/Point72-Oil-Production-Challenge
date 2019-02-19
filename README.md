@@ -13,7 +13,7 @@ Given the inputs `[d, p, out(0), r]` your task is to predict two outputs:
 ## Clone Repo 
 #### Follow these steps to clone the repository
 ``` bash
-  git clone https://github.com/moshejs/Point72.git
+    git clone https://github.com/moshejs/Point72-Oil-Production-Challenge.git
 ```
 
 ## Run CLI calculator

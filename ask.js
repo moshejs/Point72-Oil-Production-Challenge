@@ -1,3 +1,4 @@
+'use strict';
 /**
  * This module was taken from
  * https://stackoverflow.com/questions/36540996/how-to-take-two-consecutive-input-with-the-readline-module-of-node-js

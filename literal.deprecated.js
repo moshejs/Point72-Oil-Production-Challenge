@@ -3,7 +3,7 @@
  * It was simply a literal take on the task as well as an optimization experiment for myself to see 
  * how much faster I can make it with less variable declarations, and other JS functions. (no difference found.)
  * 
- * Anyway, enjoy this code golf (https://en.wikipedia.org/wiki/Code_golf). 9 LOC, ~2.63ms.
+ * Anyway, enjoy this code golf (https://en.wikipedia.org/wiki/Code_golf). 9 LOC, ~0.06689453125ms.
  */
 class LiteralMaxOilProduction {
     constructor(r, p, d, out0) { this.r = r, this.p = p, this.d = d, this.out0 = out0; }
@@ -15,8 +15,7 @@ class LiteralMaxOilProduction {
     }
 }
 
-/* Testing Samples */
-console.time();
+/* Testing Set */
 const literalTests = [
     new LiteralMaxOilProduction(11, 7, 1, 300),
     new LiteralMaxOilProduction(11, 7, 1, 600),
@@ -27,4 +26,8 @@ const literalTests = [
 ];
 
 literalTests.forEach(test => console.log(`out: ${test.out((test.t()))}, days ${test.t()}`))
+
+/* Testing runtime */
+console.time();
+const literalTest = new LiteralMaxOilProduction(11, 7, 1, 300);
 console.timeEnd();

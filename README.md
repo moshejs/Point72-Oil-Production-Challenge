@@ -38,9 +38,14 @@ What is the daily rate of decline of oil output in barrels of oil per day (r)? 1
 It will take 28 day(s) until max production levels are reached, and will yield 738 barrel(s) of oil!
 Would you like to run this again? (1 = Yes, any key to quit) 
 ```
+## Run CLI calculator on JSFiddle
+#### This will allow you to use your own inputs programatically.
+You can access a demo of the algorithm [here.]( https://jsfiddle.net/La8gdjzw/)
+Note that this is a different implementation from the Node demo presented here, but the algorithm used is the same.
+
 
 ## Run Tests
-#### This will run all unit tests for the exercise
+#### This will run all the unit tests available for this exercise.
 ``` bash
 cd Point72/
 npm install

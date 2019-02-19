@@ -19,7 +19,7 @@ git clone https://github.com/moshejs/Point72-Oil-Production-Challenge.git
 ## Run CLI calculator
 #### This will allow you to use your own inputs.
 ```
-cd Point72-Oil-Production-Challenge
+cd Point72-Oil-Production-Challenge/
 npm install
 npm start
 ```
@@ -47,7 +47,7 @@ Note that this is a different implementation from the Node demo presented here, 
 ## Run Tests
 #### This will run all the unit tests available for this exercise.
 ```
-cd Point72/
+cd Point72-Oil-Production-Challenge/
 npm install
 npm test
 ```

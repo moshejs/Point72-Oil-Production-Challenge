@@ -30,4 +30,5 @@ literalTests.forEach(test => console.log(`out: ${test.out((test.t()))}, days ${t
 /* Testing runtime */
 console.time();
 const literalTest = new LiteralMaxOilProduction(11, 7, 1, 300);
+literalTest.out(literalTest.t());
 console.timeEnd();

@@ -10,8 +10,7 @@ function main() {
         'What is the period of days each drill finishes an oil well (p)? ',
         'What is the initial output of a well per day in barrels of oil (out0)? ',
         'What is the daily rate of decline of oil output in barrels of oil per day (r)? '
-     ])
-         .then(([drills, period, initialOutput, decline]) => {
+     ]).then(([drills, period, initialOutput, decline]) => {
             const maxOilProduction = new MaxOilProduction(decline, period, drills, initialOutput);
             
             if (isNaN(decline) || isNaN(period) || isNaN(drills) || isNaN(initialOutput)) { // error handling

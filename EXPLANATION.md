@@ -70,4 +70,4 @@ To calculate the supply of an individual well, we subtract the product of the ra
 
 ### Method 2: Calculate Production Output by Period (Brute Force) [not implemented]
 
-Similar to method 1, the iterator is incremented by period (`p`) instead of 1. While the amount of iterations is significantly decreased, it is still a brute force method as you have an arbitrary upper limit and you are calculating a redundant amount of periods beyond the max is reached.
+Similar to method 1, the iterator is incremented by period (`p`) instead of 1. While the amount of iterations is significantly decreased, it is still a brute force method as you have an arbitrary upper limit and you are calculating a redundant amount of periods beyond the day where the first max is reached.

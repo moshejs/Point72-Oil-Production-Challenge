@@ -20,6 +20,7 @@ Given the inputs `[d, p, out(0), r]` your task is to predict two outputs:
 #### This will allow you to use your own inputs.
 ``` bash
   cd Point72/
+  npm install
   npm start
 ```
 
@@ -42,6 +43,7 @@ Would you like to run this again? (1 = Yes, any key to quit)
 #### This will run all unit tests for the exercise
 ``` bash
   cd Point72/
+  npm install
   npm test
 ```
 Your results should look like this...

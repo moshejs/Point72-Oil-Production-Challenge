@@ -2,7 +2,7 @@
 
 Imagine that you are hired by an oil company in need of assistance predicting their supply output. You are tasked with formulating and implementing an algorithm given the following production parameters:
 
-The company owns a number, `d`, of mining drills. Each drill finishes an oil well each period, `p`, at which point the well immediately starts supplying oil. - Each well has an initial output, `out(0)`, per day of barrels of oil. There are no wells to start. They start accumulating wells as drills complete them. - Each day the oil well output declines linearly by a fixed rate, `r` until the production reaches zero and the well is depleted.
+The company own a number, `d`, of mining drills. Each drill finishes an oil well each period, `p`, at which point the well immediately starts supplying oil. - Each well has an initial output, `out(0)`, per day of barrels of oil. There are no wells to start. They start accumulating wells as drills complete them. - Each day the oil well output declines linearly by a fixed rate, `r` until the production reaches zero and the well is depleted.
 
 Given the inputs `[d, p, out(0), r]` your task is to predict two outputs: 
 - `t(max)`: how long until the company reaches its maximum production level 

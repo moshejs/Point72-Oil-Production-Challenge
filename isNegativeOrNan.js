@@ -1,3 +1,4 @@
+'use strict';
 function isNegativeOrNaN(x) {
 	return isNaN(x) || x <= 0
 } 

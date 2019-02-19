@@ -46,7 +46,7 @@ Note that this is a different implementation from the Node demo presented here, 
 
 ## Run Tests
 #### This will run all the unit tests available for this exercise.
-``` bash
+```
 cd Point72/
 npm install
 npm test

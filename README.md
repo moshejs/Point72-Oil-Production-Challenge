@@ -28,7 +28,7 @@ Your output should look like this...
 ``` bash
 $ npm start
 
-> max-oil-production@0.0.0 start /Point72
+> max-oil-production@0.0.0 start /Point72-Oil-Production-Challenge
 > node index.js
 
 How many mining drills does the company own (d)? 1
@@ -50,7 +50,7 @@ Your results should look like this...
 ``` bash
 $ npm test
 
-> max-oil-production@0.0.0 test /Point72
+> max-oil-production@0.0.0 test /Point72-Oil-Production-Challenge
 > mocha --recursive
 
   Example 1: Simple case

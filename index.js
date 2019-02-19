@@ -1,6 +1,7 @@
 'use strict';
 const { askQuestions } = require('./ask');
 const MaxOilProduction = require('./MaxOilProduction');
+const isNegativeOrNaN = require('./isNegativeOrNaN');
 /**
  * This function demonstrates a use case for the oil production algoritm.
  */
@@ -11,8 +12,8 @@ function main() {
         'What is the initial output of a well per day in barrels of oil (out0)? ',
         'What is the daily rate of decline of oil output in barrels of oil per day (r)? '
      ]).then(([drills, period, initialOutput, decline]) => {            
-            if (isNaN(decline) || isNaN(period) || isNaN(drills) || isNaN(initialOutput)) { // error handling
-                console.log(`Values must be numbers, let's try that again!`)
+            if (isNegativeOrNaN(decline) || isNegativeOrNaN(period) || isNegativeOrNaN(drills) || isNegativeOrNaN(initialOutput)) { // error handling
+                console.log(`Values must be postive numbers, let's try that again!`)
                 main();
             } else {
                 const maxOilProduction = new MaxOilProduction(decline, period, drills, initialOutput);

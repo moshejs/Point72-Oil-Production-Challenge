@@ -1,49 +1,48 @@
 'use strict';
 const isNegativeOrNaN = require('./isNegativeOrNaN');
-/**
- * Represents a class to determine:
- * 1. Company's maximum production level (days)
- * 2. Company's peak daily oil production (barrels)
- */
- class MaxOilProduction {
-    /**
-     * 
-     * @param {number} decline - The decline of oil output in barrels/day.
-     * @param {number} period - The amount of days it takes to drill new well.
-     * @param {number} drills - The amount of oil drills the company has available.
-     * @param {number} initialOutput - The initial output of a well in barrels of oil.
-     */
-    constructor(decline, period, drills, initialOutput) {
-        if(isNegativeOrNaN(decline) || isNegativeOrNaN(period) ||isNegativeOrNaN(drills) || isNegativeOrNaN(initialOutput)) {
-            throw new Error(`Values must be postive numbers`);
-        }
 
-        this.decline = decline;
-        this.period = period;
-        this.drills = drills;
-        this.initialOutput = initialOutput;
+// Class MaxOilProduction: Manages oil production calculations
+class MaxOilProduction {
+  /**
+   * Initialize instance with parameters.
+   * @param {Object} params - Initialization parameters.
+   * @throws {Error} Throws an error if any parameter is negative or NaN.
+   */
+  constructor({ decline, period, drills, initialOutput }) {
+    if ([decline, period, drills, initialOutput].some(isNegativeOrNaN)) {
+      throw new Error('Initialization values must be positive numbers.');
     }
-    /**
-     * Calculates amount of days until company reaches the maximum production level.
-     * @return {number} The amount of days to reach maximum production level.
-     */
-    maxProductionLevelInDays() {
-        // rounds up to the next multiple of period
-        const daysUntilFirstWellDepletes = Math.ceil(this.initialOutput / this.decline / this.period) * this.period; 
-        return daysUntilFirstWellDepletes < this.period ? this.period : daysUntilFirstWellDepletes;
+    Object.assign(this, { decline, period, drills, initialOutput });
+  }
+
+  /**
+   * Calculate days to reach maximum production.
+   * @return {number} Days to peak production.
+   */
+  maxProductionLevelInDays() {
+    const daysUntilFirstWellDepletes = Math.ceil(this.initialOutput / this.decline / this.period) * this.period;
+    return Math.max(daysUntilFirstWellDepletes, this.period);
+  }
+
+  /**
+   * Compute peak daily oil production in barrels.
+   * @param {number} dayofMaxProduction - Days to reach peak production.
+   * @return {number} Peak daily production in barrels.
+   */
+  peakDailyOilProduction(dayofMaxProduction) {
+    let total = 0;
+    let day = this.period;
+    const decline = this.decline;
+    const period = this.period;
+    const initialOutput = this.initialOutput;
+
+    while (day <= dayofMaxProduction) {
+      total += initialOutput - (decline * (day - period));
+      day += period;
     }
-    /**
-     * Calculates the peak oil production levels in barrels of oil.
-     * @param {function} dayofMaxProduction - The amount of days to reach maximum production levels.
-     * @return {number} Peak daily oil production in barrels
-     */
-    peakDailyOilProduction(dayofMaxProduction) { 
-        let total = 0;
-        for (let day = this.period; day <= dayofMaxProduction; day = day + this.period) {
-            const periodTotalProduction = this.initialOutput - (this.decline * (day - this.period));
-            total += periodTotalProduction;
-        }
-        return total * this.drills;
-    }
+
+    return total * this.drills;
+  }
 }
+
 module.exports = MaxOilProduction;

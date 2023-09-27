@@ -1,72 +1,100 @@
-# Motivation
+# Optimized Algorithm for Max Oil Production
 
-At first, one might try a naive (or brute force) solution to solve this problem. While it does get the task completed, it does not show a fair understanding of the problem and can prevent one from discovering a cyclical pattern of oil production given the constraints [p,r,d, out0]. While my solution is algorithmic, I discuss the method of brute force in detail at the end.
+## Motivation
 
-    constructor(decline, period, drills, initialOutput) {
-        if(decline <= 0 || period <= 0 || drills <= 0  || initialOutput <= 0) 
-            throw new Error(`Values must be >= 0`);
+A naive or brute-force solution could solve this problem but lacks efficiency and doesn't exploit any underlying patterns in oil production given the constraints \([p, r, d, \text{out}_0]\). This document presents an algorithmic solution that is not only more efficient but also provides insights into the cyclical nature of oil production.
 
-        this.decline = decline;
-        this.period = period;
-        this.drills = drills;
-        this.initialOutput = initialOutput;
-    }
+---
 
-# Algorithmic approach
+## Algorithmic Approach
 
-## TL;DR
-### We reach max production at the period after the first well has been depleted, except when first well depletes before a second well is fully drilled.
+### TL;DR
 
-## `t(max)`
+The maximum production is reached at the period just after the first well has been depleted, with an exception when the first well depletes before a second well is fully drilled.
 
-In order to determine the amount of days until a company reaches its maximum production level, we must find a relationship between the initial output of a well (`out0`), the daily decline in supply of a well (`r`), and the period until another well is available (`p`).
+### Calculating \( t(\text{max}) \)
 
-This relationship is modeled by determining the ceiling quotient between `out0` and `r`, which gives us "the day our first well is depleted" (`dod`). 
+#### Objective
 
-By dividing `dod` by `p`, we find how many periods (therefore wells) exist in our cycle (`c`). The product of `c` and `p`, yields `t(max)`, as in some cases our first well depletes before the next period (`p`) while additional wells in the cycle still have oil supply available.
+To find the number of days \( t(\text{max}) \) until the company reaches its maximum production level. 
 
-The maximum amount of available wells (`c`) is determined the day before the first well is depleted. Since our first well would be at its lowest supply levels, we must wait until the next well becomes available in order to determine our peak day and maximum output. 
-To conclude, the day where a new well is available after the first well is depleted is our earliest `t(max).`
- 
- *Note: An edge case is found where `dod < p`, where the amount of time it takes for the first well to deplete is greater than our period to drill a second well. It is solved through a comparator, and as a result `out(t(max)) = out0, and t(max) = p` since there is no oil supply left in our first well once the next (2nd) well is available.*
+#### Formula
 
-     maxProductionLevelInDays() {
-        const daysUntilFirstWellDepletes = Math.ceil(this.initialOutput / this.decline / this.period) * this.period;
-        
-        return daysUntilFirstWellDepletes < this.period ? this.period : daysUntilFirstWellDepletes;
-    }
+\[
+t(\text{max}) = \lceil \frac{{\text{out}_0}}{r} \rceil \times p
+\]
 
-## `out(t(max))`
+Here, \( \lceil \frac{{\text{out}_0}}{r} \rceil \) calculates the ceiling quotient which represents the day the first well is depleted, termed as "Day of Depletion" (DoD). Multiplying it by \( p \) rounds it up to the nearest period.
 
-Now that we have the day of max production, `t(max)`, we use that as a "calculated" upper bound to find the peak daily production supply in barrels of oil, `out(t(max))`. 
+#### Edge Case
 
-To do this, we must find the summation of the supply available for each well, which is defined by the period of time when it is available (`1p, 2p, ..., max-p`). 
+When \( \text{DoD} < p \), the first well depletes before the second well is drilled. In such cases:
 
-To calculate the supply of an individual well, we subtract the product of the rate of decline and the number of days passed since the well was made available from the initial output given. 
+\[
+t(\text{max}) = p, \quad \text{out}(t(\text{max})) = \text{out}_0
+\]
 
-*Note: Since multiplication is associative, we can factor in the number of drills provided once the total for a single drill has been found.*
+```javascript
+maxProductionLevelInDays() {
+   const daysUntilFirstWellDepletes = Math.ceil(this.initialOutput / this.decline / this.period) * this.period;
+   return Math.max(daysUntilFirstWellDepletes, this.period);
+}
+```
 
-    peakDailyOilProduction(dayofMaxProduction) { 
-        let total = 0;
-        for (let day = this.period; day <= dayofMaxProduction; day = day + this.period) {
-            const periodTotalProduction = this.initialOutput - (this.decline * (day - this.period));
-            if(periodTotalProduction > 0) total += periodTotalProduction;
-        }
-        return total * this.drills;
-    }
+### Calculating \( \text{out}(t(\text{max})) \)
 
-# Brute Force
+#### Objective
 
-### Method 1: Calculate Production Output by Day (Brute Force)  [not implemented]
+To find the peak daily oil production \( \text{out}(t(\text{max})) \) in barrels, given \( t(\text{max}) \).
 
-1. Generate an arbitrarily high upper limit (`e.x. 100,000`)
-2. Calculate daily production for every day until the limit is reached
-3. Store daily production in `array/object` where 
-        `key = day, value = production output`
-4. iterate through the array and store the maximum production output (`if currentMax > max`) in a variable.
-5. return the max variable after iteration is complete
+#### Formula
 
+\[
+\text{out}(t(\text{max})) = \sum_{i=1}^{n} (\text{out}_0 - r \times (ip - p)) \times d
+\]
 
-### Method 2: Calculate Production Output by Period (Brute Force) [not implemented]
+Here, \( n \) is the total number of wells, \( i \) is the current well, and \( d \) is the number of drills.
 
-Similar to method 1, the iterator is incremented by the period (`p`) instead of 1. While the amount of iterations is significantly decreased, it is still a brute force method as you have an arbitrary upper limit and you are calculating a redundant amount of periods beyond the day where the first max is reached.
+```javascript
+peakDailyOilProduction(dayofMaxProduction) {
+  let total = 0;
+  let day = this.period;
+  const decline = this.decline;
+  const period = this.period;
+  const initialOutput = this.initialOutput;
+
+  while (day <= dayofMaxProduction) {
+    total += initialOutput - (decline * (day - period));
+    day += period;
+  }
+
+  return total * this.drills;
+}
+```
+
+---
+
+## Brute Force Approaches (Not Implemented)
+
+### Method 1: Daily Calculation
+
+1. Set a high upper limit (e.g., 100,000 days).
+2. Calculate daily production until the limit.
+3. Store daily production in an array or object.
+4. Iterate through the data to find the maximum production.
+
+### Method 2: Periodic Calculation
+
+Similar to Method 1, but increments by period \( p \) instead of 1 day. This still involves an arbitrary upper limit and excessive calculations.
+
+---
+
+## Performance Metrics
+
+The algorithmic approach runs in \( O(n) \) time complexity, where \( n \) is the number of periods until \( t(\text{max}) \). This is a significant improvement over the brute-force approach with a time complexity of \( O(N) \), where \( N \) is an arbitrarily high number.
+
+---
+
+## Test Cases
+
+Refer to the test suite for validation against edge cases, boundary conditions, and stress tests.

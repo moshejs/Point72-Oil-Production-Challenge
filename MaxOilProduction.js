@@ -30,17 +30,8 @@ class MaxOilProduction {
    * @return {number} Peak daily production in barrels.
    */
   peakDailyOilProduction(dayofMaxProduction) {
-    let total = 0;
-    let day = this.period;
-    const decline = this.decline;
-    const period = this.period;
-    const initialOutput = this.initialOutput;
-
-    while (day <= dayofMaxProduction) {
-      total += initialOutput - (decline * (day - period));
-      day += period;
-    }
-
+    const wells = dayofMaxProduction / this.period;
+    const total = wells * this.initialOutput - this.decline * this.period * wells * (wells - 1) / 2;
     return total * this.drills;
   }
 }

@@ -49,25 +49,18 @@ To find the peak daily oil production \( \text{out}(t(\text{max})) \) in barrels
 
 #### Formula
 
+The per-well contribution at peak is an arithmetic progression. For wells \( i = 1 \dots n \), well \( i \) produces \( \text{out}_0 - r \times p \times (i-1) \) barrels per day. Summing the series gives a closed form:
+
 \[
-\text{out}(t(\text{max})) = \sum_{i=1}^{n} (\text{out}_0 - r \times (ip - p)) \times d
+\text{out}(t(\text{max})) = \left( n \times \text{out}_0 - r \times p \times \frac{n(n-1)}{2} \right) \times d
 \]
 
-Here, \( n \) is the total number of wells, \( i \) is the current well, and \( d \) is the number of drills.
+where \( n = t(\text{max}) / p \) is the total number of wells and \( d \) is the number of drills.
 
 ```javascript
 peakDailyOilProduction(dayofMaxProduction) {
-  let total = 0;
-  let day = this.period;
-  const decline = this.decline;
-  const period = this.period;
-  const initialOutput = this.initialOutput;
-
-  while (day <= dayofMaxProduction) {
-    total += initialOutput - (decline * (day - period));
-    day += period;
-  }
-
+  const wells = dayofMaxProduction / this.period;
+  const total = wells * this.initialOutput - this.decline * this.period * wells * (wells - 1) / 2;
   return total * this.drills;
 }
 ```
@@ -91,7 +84,7 @@ Similar to Method 1, but increments by period \( p \) instead of 1 day. This sti
 
 ## Performance Metrics
 
-The algorithmic approach runs in \( O(n) \) time complexity, where \( n \) is the number of periods until \( t(\text{max}) \). This is a significant improvement over the brute-force approach with a time complexity of \( O(N) \), where \( N \) is an arbitrarily high number.
+Both \( t(\text{max}) \) and \( \text{out}(t(\text{max})) \) run in \( O(1) \) time and space — pure arithmetic with no iteration. The closed form for the peak production sum uses the standard arithmetic-series identity, removing the per-well loop that earlier versions of this implementation relied on.
 
 ---
 

@@ -8,7 +8,7 @@ class MaxOilProduction {
    * @param {Object} params - Initialization parameters.
    * @throws {Error} Throws an error if any parameter is negative or NaN.
    */
-  constructor({ decline, period, drills, initialOutput }) {
+  constructor(decline, period, drills, initialOutput) {
     if ([decline, period, drills, initialOutput].some(isNegativeOrNaN)) {
       throw new Error('Initialization values must be positive numbers.');
     }
